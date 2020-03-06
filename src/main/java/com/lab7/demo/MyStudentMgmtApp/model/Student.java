@@ -2,11 +2,14 @@ package com.lab7.demo.MyStudentMgmtApp.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+//import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
@@ -22,12 +25,12 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long studentId;
 	
-	@NotEmpty
+	@Column(nullable = false)
 	private String studentNumber;
 	private String firstName;
 	private String middleName;
 	
-	@NotEmpty
+	@Column(nullable = false)
 	private String lastName;
 	private Double cgpa;
 	private LocalDate dateOfEnrollement;
@@ -36,6 +39,12 @@ public class Student {
 	private Transcript transcript;
 	@ManyToOne
 //	@JoinColumn(name="classroom_id")
+	@JoinTable(
+		name = "student_classroom",
+		joinColumns = @JoinColumn(name = "student_id"),
+		inverseJoinColumns = @JoinColumn(name = "classroom_id")
+				
+	)
 	private Classroom classroom;
 	
 	

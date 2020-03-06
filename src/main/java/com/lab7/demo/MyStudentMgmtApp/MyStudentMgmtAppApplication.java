@@ -2,6 +2,7 @@ package com.lab7.demo.MyStudentMgmtApp;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,8 @@ public class MyStudentMgmtAppApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		List<Student> class1 = new ArrayList<Student>();
-		List<Student> class2 = new ArrayList<Student>();
+		List<Student> student1 = new ArrayList<Student>();
+		List<Student> student2 = new ArrayList<Student>();
 		
 //		Student s1 = new Student(studentNumber, firstName, middleName, lastName, cgpa, dateOfEnrollement, transcript);
 //		Classroom c1 = new Classroom(buildingName, roomNo)
@@ -56,16 +57,19 @@ public class MyStudentMgmtAppApplication implements CommandLineRunner {
 		s2.setClassroom(c1);
 		s3.setClassroom(c2);
 		
-		class1.add(s1);
-		class1.add(s2);
-		class2.add(s3);
 		
-		c1.setStudent(class1);
-		c2.setStudent(class2);
+//		student1.add(s1);
+//		student1.add(s2);
+		student1 = Arrays.asList(s1,s2);
+		student2.add(s3);
+		
 		
 		transcriptRepo.save(t1);
 		transcriptRepo.save(t2);
 		
+
+		c1.setStudent(student1);
+		c2.setStudent(student2);
 		classRepo.save(c1);
 		classRepo.save(c2);
 		
